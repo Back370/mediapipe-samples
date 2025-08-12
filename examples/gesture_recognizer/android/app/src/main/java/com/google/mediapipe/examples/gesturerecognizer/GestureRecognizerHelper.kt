@@ -73,7 +73,7 @@ class GestureRecognizerHelper(
             }
         }
 
-        baseOptionBuilder.setModelAssetPath(MP_RECOGNIZER_TASK)
+        baseOptionBuilder.setModelAssetPath("assets/gesture_recognizer.task")
 
         try {
             val baseOptions = baseOptionBuilder.build()
@@ -83,7 +83,9 @@ class GestureRecognizerHelper(
                     .setMinHandDetectionConfidence(minHandDetectionConfidence)
                     .setMinTrackingConfidence(minHandTrackingConfidence)
                     .setMinHandPresenceConfidence(minHandPresenceConfidence)
-                    .setRunningMode(runningMode)
+                    .setResultListener(this::returnLivestreamResult)
+                    .setErrorListener(this::returnLivestreamError)
+                    .setRunningMode(RunningMode.LIVE_STREAM)
 
             if (runningMode == RunningMode.LIVE_STREAM) {
                 optionsBuilder
